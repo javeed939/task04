@@ -59,3 +59,13 @@ variable "azure_domain_label" {
   type        = string
   description = "Domain label for the Public IP."
 }
+
+variable "azure_resource_group" {
+  type        = string
+  description = "Name of the resource group."
+}
+
+variable "azure_vm" {
+  type        = string
+  description = "Name of the Virtual Machine."
+}

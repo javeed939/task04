@@ -15,3 +15,4 @@ frontend_prefixes       = ["10.0.1.0/24"]
 address_space           = ["10.0.0.0/16"]
 os_disk_name            = "cmaz-gt5izdn0-mod4-osdisk"
 size                    = "Standard_F2s_v2"
+ip_configuration        = "internal"

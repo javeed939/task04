@@ -91,3 +91,8 @@ variable "size" {
   description = "Size of the Virtual Machine."
 
 }
+
+variable "ip_configuration" {
+  type        = string
+  description = "Name of the IP configuration."
+}

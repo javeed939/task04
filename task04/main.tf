@@ -50,19 +50,19 @@ resource "azurerm_network_security_group" "nsg" {
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_ranges    = ["22"]    # list form (required by provider)
-    source_address_prefix      = "0.0.0.0/0"   # consider restricting this
+    destination_port_ranges    = ["22"]      # list form (required by provider)
+    source_address_prefix      = "0.0.0.0/0" # consider restricting this
     destination_address_prefix = "*"
   }
 
- security_rule {
+  security_rule {
     name                       = var.azure_http
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_ranges    = ["80"]    # list form (required by provider)
+    destination_port_ranges    = ["80"] # list form (required by provider)
     source_address_prefix      = "0.0.0.0/0"
     destination_address_prefix = "*"
   }

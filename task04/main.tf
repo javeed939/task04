@@ -3,12 +3,12 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 
   tags = {
-    Creator = "javeed_shaik@epam.com"
+    Creator = var.creator_tag_name
   }
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "cmaz-gt5izdn0-mod4-vnet"
+  name                = var.vnet_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   address_space       = ["10.0.0.0/16"]
@@ -19,19 +19,19 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 resource "azurerm_subnet" "frontend" {
-  name                 = "frontend"
+  name                 = var.azurerm_subnet_frontend
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_public_ip" "pip" {
-  name                = "cmaz-gt5izdn0-mod4-pip"
+  name                = var.azure_ip
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label   = "cmaz-gt5izdn0-mod4-nginx"
+  domain_name_label   = var.azure_domain_label
 
   tags = {
     Creator = var.creator_tag_name
@@ -39,7 +39,7 @@ resource "azurerm_public_ip" "pip" {
 }
 
 resource "azurerm_network_security_group" "nsg" {
-  name                = "cmaz-gt5izdn0-mod4-nsg"
+  name                = var.azure_nsg
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -50,7 +50,7 @@ resource "azurerm_network_security_group" "nsg" {
 
 # Standalone NSG rule for HTTP
 resource "azurerm_network_security_rule" "allow_http" {
-  name                        = "AllowHTTP"
+  name                        = var.azure_http
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
@@ -65,7 +65,7 @@ resource "azurerm_network_security_rule" "allow_http" {
 
 # Standalone NSG rule for SSH
 resource "azurerm_network_security_rule" "allow_ssh" {
-  name                        = "AllowSSH"
+  name                        = var.azure_ssh
   priority                    = 200
   direction                   = "Inbound"
   access                      = "Allow"
@@ -79,7 +79,7 @@ resource "azurerm_network_security_rule" "allow_ssh" {
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = "cmaz-gt5izdn0-mod4-nic"
+  name                = var.azure_nic
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 

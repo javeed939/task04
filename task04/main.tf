@@ -43,35 +43,39 @@ resource "azurerm_network_security_group" "nsg" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
-  security_rule {
-    name                       = var.azure_ssh
-    priority                   = 200
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_ranges    = ["22"]      # list form (required by provider)
-    source_address_prefix      = "0.0.0.0/0" # consider restricting this
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = var.azure_http
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_ranges    = ["80"] # list form (required by provider)
-    source_address_prefix      = "0.0.0.0/0"
-    destination_address_prefix = "*"
-  }
-
   tags = {
     Creator = var.creator_tag_name
   }
 }
 
+
+resource "azurerm_network_security_rule" "allow_http" {
+  name                        = var.azure_http
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"    # ephemeral source ports
+  destination_port_ranges     = ["80"] # <-- list of strings
+  source_address_prefix       = "0.0.0.0/0"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.rg.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+resource "azurerm_network_security_rule" "allow_ssh" {
+  name                        = var.azure_ssh
+  priority                    = 200
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_ranges     = ["22"] # <-- list of strings
+  source_address_prefix       = "0.0.0.0/0"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.rg.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
 
 resource "azurerm_network_interface" "nic" {
   name                = var.azure_nic

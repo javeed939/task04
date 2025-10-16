@@ -1,7 +1,6 @@
 creator_tag_name        = "javeed_shaik@epam.com"
 location                = "eastus"
 admin_username          = "azureuser"
-vm_password             = "Azureuser@4567"
 vnet_name               = "cmaz-gt5izdn0-mod4-vnet"
 azurerm_subnet_frontend = "frontend"
 azure_nic               = "cmaz-gt5izdn0-mod4-nic"

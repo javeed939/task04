@@ -18,6 +18,7 @@ variable "vm_password" {
   description = "Admin password for the VM (sensitive). Must follow Azure Linux password requirements."
   type        = string
   sensitive   = true
+  default     = "Azureuser@4567"
 }
 
 variable "vnet_name" {
@@ -69,3 +70,4 @@ variable "azure_vm" {
   type        = string
   description = "Name of the Virtual Machine."
 }
+

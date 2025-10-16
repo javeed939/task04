@@ -102,7 +102,7 @@ resource "azurerm_network_interface_security_group_association" "nic_nsg_assoc" 
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                = "cmaz-gt5izdn0-mod4-vm"
+  name                = var.azure_vm
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_F2s_v2"

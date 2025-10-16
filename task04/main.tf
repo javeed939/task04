@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "cmaz-gt5izdn0-mod4-rg"
+  name     = var.azure_resource_group
   location = var.location
 
   tags = {

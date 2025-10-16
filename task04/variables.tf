@@ -71,3 +71,23 @@ variable "azure_vm" {
   description = "Name of the Virtual Machine."
 }
 
+variable "frontend_prefixes" {
+  type        = list(string)
+  description = "Address prefixes for the frontend subnet."
+}
+
+variable "address_space" {
+  type        = list(string)
+  description = "Address space for the virtual network."
+}
+
+variable "os_disk_name" {
+  type        = string
+  description = "Name of the OS disk."
+}
+
+variable "size" {
+  type        = string
+  description = "Size of the Virtual Machine."
+
+}

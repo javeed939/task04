@@ -11,7 +11,7 @@ resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  address_space       = ["10.0.0.0/16"]
+  address_space       = var.address_space
 
   tags = {
     Creator = var.creator_tag_name
@@ -22,7 +22,7 @@ resource "azurerm_subnet" "frontend" {
   name                 = var.azurerm_subnet_frontend
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = var.frontend_prefixes
 }
 
 resource "azurerm_public_ip" "pip" {
@@ -105,7 +105,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                = var.azure_vm
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_F2s_v2"
+  size                = var.size
   admin_username      = var.admin_username
   admin_password      = var.vm_password
   network_interface_ids = [
@@ -124,7 +124,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
-    name                 = "cmaz-gt5izdn0-mod4-osdisk"
+    name                 = var.os_disk_name
   }
 
   tags = {

@@ -11,3 +11,7 @@ azure_ip                = "cmaz-gt5izdn0-mod4-pip"
 azure_domain_label      = "cmaz-gt5izdn0-mod4-nginx"
 azure_resource_group    = "cmaz-gt5izdn0-mod4-rg"
 azure_vm                = "cmaz-gt5izdn0-mod4-vm"
+frontend_prefixes       = ["10.0.1.0/24"]
+address_space           = ["10.0.0.0/16"]
+os_disk_name            = "cmaz-gt5izdn0-mod4-osdisk"
+size                    = "Standard_F2s_v2"

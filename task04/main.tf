@@ -146,7 +146,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
       "sudo systemctl enable nginx",
       "sudo systemctl start nginx",
       # create a small index to prove ownership
-      "echo '<h1>NGINX on Terraform VM - cmaz-gt5izdn0</h1>' | sudo tee /var/www/html/index.html",
+      "echo 'Welcome to nginx!<br><h1>NGINX on Terraform VM - ${var.deployment_prefix}</h1>' | sudo tee /var/www/html/index.html",
     ]
   }
 }

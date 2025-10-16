@@ -96,3 +96,8 @@ variable "ip_configuration" {
   type        = string
   description = "Name of the IP configuration."
 }
+
+variable "deployment_prefix" {
+  type        = string
+  description = "Deployment prefix to identify resources."
+}

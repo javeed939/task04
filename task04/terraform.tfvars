@@ -16,3 +16,4 @@ address_space           = ["10.0.0.0/16"]
 os_disk_name            = "cmaz-gt5izdn0-mod4-osdisk"
 size                    = "Standard_F2s_v2"
 ip_configuration        = "internal"
+deployment_prefix       = "Welcome to nginx!"
